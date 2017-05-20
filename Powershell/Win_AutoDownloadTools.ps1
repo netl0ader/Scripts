@@ -40,9 +40,11 @@ $programs = @{
 	'ReportFabricator.msi' = 'http://www.lizard-labs.com/Downloads/ReportFabricatorSetup.msi';
 }
 
+$dir = Split-Path($MyInvocation.MyCommand.Path) #To download in the same folder as the script.
+
 foreach ($h in $programs.GetEnumerator()){
 	$h.Name
 	Invoke-WebRequest $h.Value -OutFile $h.Name
-   	#IF THE ONE FROM ABOVE DOESN'T WORK REPLACE -> (new-object System.Net.WebClient).DownloadFile($h.Value,$h.Name)
+   	#IF THE ONE FROM ABOVE DOESN'T WORK REPLACE -> (new-object System.Net.WebClient).DownloadFile($h.Value,$dir+"\"+$h.Name)
 	Start-Sleep -m 100
 }
