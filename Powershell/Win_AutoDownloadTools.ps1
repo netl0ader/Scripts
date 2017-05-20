@@ -48,3 +48,9 @@ foreach ($h in $programs.GetEnumerator()){
    	#IF THE ONE FROM ABOVE DOESN'T WORK REPLACE -> (new-object System.Net.WebClient).DownloadFile($h.Value,$dir+"\"+$h.Name)
 	Start-Sleep -m 100
 }
+foreach ($zipFile in $programs.GetEnumerator()){
+    if ( $zipFile.Name -Match ".zip") {
+        Expand-Archive $zipFile.Name
+    }
+     
+}
