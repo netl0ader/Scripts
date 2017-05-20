@@ -1,6 +1,7 @@
 #Powershell Script - Auto-Download-Tools
 # Script Created by N37104d3r on [18/05/2017]
 
+#List of programs. I've used the Keys as filenames and the Value as URI. Easier to understand. 
 $programs = @{
 	'HxDSetupEN.zip'		= 'http://mh-nexus.de/downloads/HxDSetupEN.zip';
 	'Hyperion-1.2.zip'		= 'https://github.com/nullsecuritynet/tools/raw/master/binary/hyperion/release/Hyperion-1.2.zip'; 
@@ -30,7 +31,8 @@ $programs = @{
         'MaltegoCESetup.JRE64.v4.0.11.9358.exe' = 'https://www.paterva.com/malv4/community/MaltegoCESetup.JRE64.v4.0.11.9358.exe';
         'NtopWin_x64_v7.5.170507.zip' = 'http://packages.ntop.org/Windows/nProbeWin-x64-7.5.170507.zip';
         'Tor_v6.5.2.exe' = 'https://www.torproject.org/dist/torbrowser/6.5.2/torbrowser-install-6.5.2_en-US.exe';
-        'NagiosNetworkAnalyzer_v2.2.3-64.ova' = 'https://assets.nagios.com/downloads/nagios-network-analyzer/2/ovf/nagiosna-2.2.3-64.ova';
+        #Comment Nagios Lines if your Internet connection is Low. It takes a while.
+	'NagiosNetworkAnalyzer_v2.2.3-64.ova' = 'https://assets.nagios.com/downloads/nagios-network-analyzer/2/ovf/nagiosna-2.2.3-64.ova';
         'NagiosXI_v5.4.4-64.ova' = 'https://assets.nagios.com/downloads/nagiosxi/5/ovf/nagiosxi-5.4.4-64.ova';
         'NagiosLogServer_v1.4.4-64.ova' = 'https://assets.nagios.com/downloads/nagios-log-server/1/ovf/nagioslogserver-1.4.4-64.ova';
         'Nemesis_v1.4.zip' = 'https://netcologne.dl.sourceforge.net/project/nemesis/nemesis/1.4/nemesis-1.4.zip';
@@ -48,6 +50,7 @@ foreach ($h in $programs.GetEnumerator()){
    	#IF THE ONE FROM ABOVE DOESN'T WORK REPLACE -> (new-object System.Net.WebClient).DownloadFile($h.Value,$dir+"\"+$h.Name)
 	Start-Sleep -m 100
 }
+#To unzip automatically every zip file.
 foreach ($zipFile in $programs.GetEnumerator()){
     if ( $zipFile.Name -Match ".zip") {
         Expand-Archive $zipFile.Name
